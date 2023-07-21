@@ -53,9 +53,11 @@ app.get("/albums", function (request, response) {
 });
 
 app.get("/albums/:albumId", function (request, response) {
-  const albumIdSearch = request.params.albumId;
+  const albumIdSearch = parseInt(request.params.albumId);
   console.log(request.params.albumId);
-  const foundAlbum = albumsData.find((album) => album.albumId == albumIdSearch);
+  const foundAlbum = albumsData.find(
+    (album) => album.albumId === albumIdSearch
+  );
   response.send(foundAlbum);
 });
 
@@ -75,9 +77,9 @@ app.post("/albums", function (request, response) {
 });
 
 app.delete("/albums/:albumId", function (request, response) {
-  const albumIdDelete = request.params.albumId;
+  const albumIdDelete = parseInt(request.params.albumId); // the id is taken from the url and is a string so it needs to be parsed to an integer for a strict comparison to work
   const itemIndex = albumsData.findIndex(
-    ({ albumId }) => albumId == albumIdDelete // no strict comparison as id is actually a string (different datatype)
+    ({ albumId }) => albumId === albumIdDelete
   );
   if (itemIndex >= 0) {
     albumsData.splice(itemIndex, 1);
