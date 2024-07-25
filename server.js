@@ -89,6 +89,22 @@ app.delete("/albums/:albumId", function (request, response) {
   }
 });
 
+// option 2 - using .find instead of .findIndex and then using filter to create new array filtering out the albumIdDelete
+
+// app.delete("/albums/:albumId", function (request, response) {
+//   const albumIdDelete = parseInt(request.params.albumId);
+//   const foundAlbum = albumsData.find(
+//     ({ albumId }) => albumId === albumIdDelete
+//   );
+
+//   if (foundAlbum) {
+//     albumsData = albumsData.filter(({ albumId }) => albumId !== albumIdDelete);
+//     response.json(albumsData);
+//   } else {
+//     response.json({ message: "Album not found." });
+//   }
+// });
+
 app.listen(3000, function () {
   console.log("Server is listening on port 3000. Ready to accept requests!");
 });
